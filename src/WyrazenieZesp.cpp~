@@ -1,0 +1,65 @@
+#include "WyrazenieZesp.hh"
+
+void Wyswietl(WyrazenieZesp WyrZ){
+  cout << '(' << WyrZ.Arg1.re << showpos << WyrZ.Arg1.im << noshowpos << "i)";
+
+  switch(WyrZ.Op){
+  case Op_Dodaj:  {
+    cout << " + ";
+    break;
+  }
+    
+  case Op_Odejmij:  {
+    cout << " - ";
+    break;
+  }
+    
+  case Op_Mnoz:  {
+    cout << " * ";
+    break;
+  }
+    
+  case Op_Dziel:  {
+    cout << " / ";
+    break;
+  }
+  }
+    
+  cout << '(' << WyrZ.Arg2.re << showpos << WyrZ.Arg2.im << noshowpos << "i)" << endl;
+  
+}
+
+
+
+LZespolona Oblicz(WyrazenieZesp WyrZ){
+
+  LZespolona Wynik;
+  
+  switch(WyrZ.Op){
+  case Op_Dodaj:  {
+    Wynik = WyrZ.Arg1 + WyrZ.Arg2;
+    break;
+  }
+    
+  case Op_Odejmij:  {
+    Wynik = WyrZ.Arg1 - WyrZ.Arg2;
+    break;
+  }
+    
+  case Op_Mnoz:  {
+    Wynik = WyrZ.Arg1 * WyrZ.Arg2;
+    break;
+  }
+    
+  case Op_Dziel:  {
+    Wynik = WyrZ.Arg1 / WyrZ.Arg2;
+    break;
+  }
+  }
+ 
+  return Wynik;
+
+
+
+
+}
