@@ -11,25 +11,12 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-  /*
   WyrazenieZesp WyrZ;
-  
-  LZespolona Liczba1 = utworz(2,3);
-  wyswietl(Liczba1);
-  LZespolona Liczba2 = utworz(2,-4);
-  wyswietl(Liczba2);
 
-  WyrZ.Arg1 = Liczba1;
-  WyrZ.Arg2 = Liczba2;
-  WyrZ.Op = Op_Dodaj;
+  cin >> WyrZ;
+ 
+  cout << WyrZ << endl;
 
-  wczytaj(WyrZ);
-
-  Liczba1 = oblicz(WyrZ);
-
-  wyswietl(Liczba1);
-  
-  */
   
   
 
@@ -46,15 +33,7 @@ int main(int argc, char **argv){
   
 
 
-
-
-
-
-
-
-
-
-    
+  /*    
  
   if (argc < 2) {
     cout << endl;
@@ -89,5 +68,5 @@ int main(int argc, char **argv){
   cout << endl;
   cout << " Koniec testu" << endl;
   cout << endl;
-
+  */
 }

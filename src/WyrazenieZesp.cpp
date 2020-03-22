@@ -1,117 +1,84 @@
 #include "WyrazenieZesp.hh"
 
-void wyswietl(WyrazenieZesp WyrZ){
-  cout << '(' << WyrZ.Arg1.re << showpos << WyrZ.Arg1.im << noshowpos << "i)";
-
-  switch(WyrZ.Op){
-  case Op_Dodaj:  {
-    cout << " + ";
-    break;
-  }
-    
-  case Op_Odejmij:  {
-    cout << " - ";
-    break;
-  }
-    
-  case Op_Mnoz:  {
-    cout << " * ";
-    break;
-  }
-    
-  case Op_Dziel:  {
-    cout << " / ";
-    break;
-  }
-  }
-    
-  cout << '(' << WyrZ.Arg2.re << showpos << WyrZ.Arg2.im << noshowpos << "i)" << endl;
-  
+/***********************************************
+ * Przeciazenie operatora dla wyswietlania     *
+ *   wyrazenia zespolonego.                    *
+ * Argumenty:                                  *
+ *    WZes - struktura z wyrazeniem zespolonym *
+ *    strm - strumien na wejscie operatora     *
+ ***********************************************/
+std::ostream & operator << (std::ostream & strm, WyrazenieZesp &WZes) {
+  cout << WZes.Arg1 << WZes.Op << WZes.Arg2;
+  return strm;
 }
 
 
-LZespolona oblicz(WyrazenieZesp WyrZ){
+/***********************************************
+ * Przeciazenie operatora dla wyswietlania w   *
+ *   operatora w wyrazeniu zespolonym.         *
+ * Argumenty:                                  *
+ *    OP - operator z wyrazenia zespolonego    *
+ *    strm - strumien na wejscie operatora     *
+ ***********************************************/
+std::ostream & operator << (std::ostream & strm, Operator &OP) {
 
+  switch(OP){
+  case Op_Dodaj:  cout << " + ";
+  case Op_Odejmij:  cout << " - ";
+  case Op_Mnoz:  cout << " * ";
+  case Op_Dziel:  cout << " / ";
+  }
+  return strm;
+}
+  
+
+/***********************************************
+ * Funkcja obliczajaca wartosc wyrazenia       *
+ *   zespolonego.                              *
+ * Argumenty:                                  *
+ *    WyrZ - struktura z wyrazeniem zespolonym *
+ ***********************************************/
+LZespolona oblicz(WyrazenieZesp WyrZ){
   LZespolona Wynik;
   
   switch(WyrZ.Op){
-  case Op_Dodaj:  {
-    Wynik = WyrZ.Arg1 + WyrZ.Arg2;
-    break;
+  case Op_Dodaj:  Wynik = WyrZ.Arg1 + WyrZ.Arg2;
+  case Op_Odejmij:  Wynik = WyrZ.Arg1 - WyrZ.Arg2;
+  case Op_Mnoz:  Wynik = WyrZ.Arg1 * WyrZ.Arg2;
+  case Op_Dziel:  Wynik = WyrZ.Arg1 / WyrZ.Arg2;
   }
-    
-  case Op_Odejmij:  {
-    Wynik = WyrZ.Arg1 - WyrZ.Arg2;
-    break;
-  }
-    
-  case Op_Mnoz:  {
-    Wynik = WyrZ.Arg1 * WyrZ.Arg2;
-    break;
-  }
-    
-  case Op_Dziel:  {
-    Wynik = WyrZ.Arg1 / WyrZ.Arg2;
-    break;
-  }
-  }
- 
   return Wynik;
-
 }
 
 
-bool wczytaj(WyrazenieZesp &WyrZ){
+/***********************************************
+ * Przeciazenie operatora dla wczytywania      *
+ *   wyrazenia zespolonego.                    *
+ * Argumenty:                                  *
+ *    WZes - struktura na wyrazenie zespolone  *
+ *    strm - strumien na wejscie operatora     *
+ ***********************************************/
+std::istream & operator >> (std::istream & strm, WyrazenieZesp &WZes) {
+  strm >> WZes.Arg1 >> WZes.Op >> WZes.Arg2;
+  return strm;
+}
+
+
+/***********************************************
+ * Przeciazenie operatora dla wczytywania      *
+ *   operatora w wyrazeniu zespolonym.         *
+ * Argumenty:                                  *
+ *    OP - operator w wyrazeniu zespolonym     *
+ *    strm - strumien na wejscie operatora     *
+ ***********************************************/
+std::istream & operator >> (std::istream & strm, Operator &OP) {
   char znak;
-
-  cin >> znak;
-  if (znak != '(')
-    return false;
-    
-  cin >> WyrZ.Arg1.re >> WyrZ.Arg1.im >> znak;
-
-  if (znak != 'i')
-    return false;
-  
-  cin >> znak;
-  
-  if (znak != ')')
-    return false;
-
-  cin >> znak;
-
-  if (znak == '+')
-    WyrZ.Op = Op_Dodaj; 
-  else if (znak == '-')
-    WyrZ.Op = Op_Odejmij;
-  else if (znak == '*')
-    WyrZ.Op = Op_Mnoz;
-  else if (znak == '/')
-    WyrZ.Op = Op_Dziel;
-  else
-    return false;
-
-  cin >> znak;
-  if (znak != '(')
-    return false;
-    
-  cin >> WyrZ.Arg2.re >> WyrZ.Arg2.im >> znak;
-
-  if (znak != 'i')
-    return false;
-  
-  cin >> znak;
-  
-  if (znak != ')')
-    return false;
-  
-  return true;
-
-
-
-
-
-
-
-  
+  strm >> znak;
+  switch(znak) {
+  case '+': OP = Op_Dodaj;
+  case '-': OP = Op_Odejmij;
+  case '*': OP = Op_Mnoz;
+  case '/': OP = Op_Dziel;
+  }
+  return strm;
 }

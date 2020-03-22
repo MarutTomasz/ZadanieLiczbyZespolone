@@ -57,7 +57,7 @@ LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2){
  * Realizuje mnozenie dwoch liczb zespolonych.             *
  * Argumenty:                                              *
  *    Skl1 - czynnik,                                      *
- *    Skl2 - czynnik.                                     *
+ *    Skl2 - czynnik.                                      *
  * Zwraca:                                                 *
  *    Iloczyn dwoch liczb przekazanych jako argumenty.     *
  ***********************************************************/
@@ -68,7 +68,6 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2){
   Wynik.im = (Skl1.re * Skl2.im) + (Skl1.im * Skl2.re);
   return Wynik;
 }
-
 
 
 /***********************************************************
@@ -131,38 +130,36 @@ LZespolona utworz(double Re, double Im){
 }
 
 
-/************************************************************
- * Wyswietla wskazana liczbe zespolona.                     *
- * Argumenty:                                               *
- *    Liczba - struktura z liczba do wyswietlrnia           *
- ************************************************************/
-bool wyswietl(LZespolona Liczba ){
-  cout << '(' << Liczba.re << showpos << Liczba.im << noshowpos << "i)" << endl;
-  return true;
+/*************************************************************
+ * Przeciazenie operatora dla wyswietlania liczb zespolonych *
+ * Argumenty:                                                *
+ *    Liczba - struktura z liczba do wyswietlrnia            *
+ *    strm - strumien podawany na wejscie operatora          *
+ *************************************************************/
+std::ostream & operator << (std::ostream &strm, LZespolona &Liczba) {
+  cout << '(' << Liczba.re << showpos << Liczba.im << noshowpos << "i)";
+  return strm; 
 }
 
-bool wczytaj(LZespolona &Liczba) {
+
+/*************************************************************
+ * Przeciazenie operatora dla wczytywania liczb zespolonych  *
+ * Argumenty:                                                *
+ *    Liczba - struktura na liczbe do wczytania              *
+ *    strm - strumien podawany na wejscie operatora          *
+ *************************************************************/
+std::istream & operator >> (std::istream &strm, LZespolona &Liczba) {
   char znak;
-
-  cin >> znak;
+  strm >> znak;
   if (znak != '(')
-    return false;
-  
+    strm.setstate(std::ios::failbit);
 
-    
-  cin >> Liczba.re >> Liczba.im >> znak;
-
-  
-  
+  strm >> Liczba.re >> Liczba.im >> znak;
   if (znak != 'i')
-    return false;
+    strm.setstate(std::ios::failbit);
 
-  cin >> znak;
-  
+  strm >> znak;
   if (znak != ')')
-    return false;
-  
-  return true;
-  
+    strm.setstate(std::ios::failbit);
+  return strm;
 }
-
