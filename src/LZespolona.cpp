@@ -163,3 +163,11 @@ std::istream & operator >> (std::istream &strm, LZespolona &Liczba) {
     strm.setstate(std::ios::failbit);
   return strm;
 }
+
+bool operator == (LZespolona Odpowiedz, LZespolona Wynik){
+  if (Odpowiedz.re == Wynik.re)
+    if (Odpowiedz.im == Wynik.im)
+      return true;
+  return false;
+}
+  

@@ -29,6 +29,7 @@ LZespolona operator - (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator * (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator / (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator / (LZespolona  Skl1,  double Mudul);
+bool operator == (LZespolona Odpowiedz, LZespolona Wynik);
 std::istream & operator >> (std::istream &strm, LZespolona &Skl);
 std::ostream & operator << (std::ostream &strm, LZespolona &Skl);
 

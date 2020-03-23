@@ -23,10 +23,10 @@ std::ostream & operator << (std::ostream & strm, WyrazenieZesp &WZes) {
 std::ostream & operator << (std::ostream & strm, Operator &OP) {
 
   switch(OP){
-  case Op_Dodaj:  cout << " + ";
-  case Op_Odejmij:  cout << " - ";
-  case Op_Mnoz:  cout << " * ";
-  case Op_Dziel:  cout << " / ";
+  case Op_Dodaj: {cout << " + "; break;}
+  case Op_Odejmij: {cout << " - "; break;}
+  case Op_Mnoz: {cout << " * "; break;}
+  case Op_Dziel: {cout << " / "; break ;}
   }
   return strm;
 }
@@ -42,10 +42,10 @@ LZespolona oblicz(WyrazenieZesp WyrZ){
   LZespolona Wynik;
   
   switch(WyrZ.Op){
-  case Op_Dodaj:  Wynik = WyrZ.Arg1 + WyrZ.Arg2;
-  case Op_Odejmij:  Wynik = WyrZ.Arg1 - WyrZ.Arg2;
-  case Op_Mnoz:  Wynik = WyrZ.Arg1 * WyrZ.Arg2;
-  case Op_Dziel:  Wynik = WyrZ.Arg1 / WyrZ.Arg2;
+  case Op_Dodaj: {Wynik = WyrZ.Arg1 + WyrZ.Arg2; break;}
+  case Op_Odejmij: {Wynik = WyrZ.Arg1 - WyrZ.Arg2; break;}
+  case Op_Mnoz: {Wynik = WyrZ.Arg1 * WyrZ.Arg2; break;}
+  case Op_Dziel: {Wynik = WyrZ.Arg1 / WyrZ.Arg2; break;}
   }
   return Wynik;
 }
@@ -75,10 +75,10 @@ std::istream & operator >> (std::istream & strm, Operator &OP) {
   char znak;
   strm >> znak;
   switch(znak) {
-  case '+': OP = Op_Dodaj;
-  case '-': OP = Op_Odejmij;
-  case '*': OP = Op_Mnoz;
-  case '/': OP = Op_Dziel;
+  case '+': {OP = Op_Dodaj; break;}
+  case '-': {OP = Op_Odejmij; break;}
+  case '*': {OP = Op_Mnoz; break;}
+  case '/': {OP = Op_Dziel; break;}
   }
   return strm;
 }
