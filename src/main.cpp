@@ -4,11 +4,8 @@
 #include "WyrazenieZesp.hh"
 #include "Statystyka.hh"
 
-using namespace std;
-
 int main(int argc, char **argv){
 
-  LZespolona Wynik;
   Statystyka Staty;
   LZespolona Odpowiedz;
   BazaTestu BazaT = { nullptr, 0, 0 };
@@ -28,54 +25,44 @@ int main(int argc, char **argv){
     return 1;
   }
 
+  inicjuj_statystyka(Staty);
+  
   cout << endl;
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
-
-  inicjuj_statystyka(Staty);
   
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " :? Podaj wynik operacji: ";
-    cout << WyrZ_PytanieTestowe << " =" << endl;
+    cout << " :? Podaj wynik operacji: " << WyrZ_PytanieTestowe << " =" << endl;
     cout << "    Twoja odpowiedz:  ";
     cin >> Odpowiedz;
-    Wynik = oblicz(WyrZ_PytanieTestowe);
+    zeruj_pomylki(Staty);
     
-    if(!cin.good()){
+    while(!cin.good() && sprawdz_pomylki(Staty)){
       cin.clear();
-      cout << "    Niepoprawnie wpisana liczba zepolona" << endl;
+      cin.ignore(1000,'\n');
+      zwieksz_pomylka(Staty);
+      cin >> Odpowiedz;
+    }
+    
+    cin.clear();
+    
+    if(Odpowiedz == oblicz(WyrZ_PytanieTestowe)) {
+      zwieksz_poprawne(Staty);
+      cout << " :) Odpowiedz poprawna." << endl;
       cout << endl;
-      zwieksz_bledne(Staty);
+      cin.ignore(1000,'\n');
     }
     else {
-      if(Odpowiedz == Wynik) {
-	zwieksz_poprawne(Staty);
-	cout << " :) Odpowiedz poprawna." << endl;
-	cout << endl;
-	cin.ignore(1000,'\n');
-      }
-      else {
-	zwieksz_bledne(Staty);
-	cout << " :( Blad. Prawidlowym wynikiem jest " << Wynik << endl;
-	cout << endl;
-	cin.ignore(1000,'\n');
-      
-      }
+      zwieksz_bledne(Staty);
+      cout << " :( Blad. Prawidlowym wynikiem jest " << oblicz(WyrZ_PytanieTestowe) << endl;
+      cout << endl;
+      cin.ignore(1000,'\n');
     }
   }
-
-
-
-
- 
-
   
   cout << endl;
   cout << " Koniec testu" << endl;
   cout << endl;
 
-  cout << " Ilosc dobrych odpowiedzi: " << zwroc_l_poprawnych(Staty) << endl;
-  cout << " Ilosc blednych odpowiedzi: " << zwroc_l_blednych(Staty) << endl;
-  cout << " Wynik procentowy dobrych odpowiedzi: " << zwroc_proc_poprawnych(Staty) << "%" << endl;
-  cout << endl;
+  cout << Staty;
 }

@@ -1,9 +1,6 @@
-#include <iostream>
 #include <cstring>
 #include <cassert>
 #include "BazaTestu.hh"
-
-using namespace std;
 
 /*****************************************************
  * Tablica, ktora jest widoczna tylko w tym module.  *
@@ -16,11 +13,14 @@ static WyrazenieZesp  TestLatwy[] =
     {{4,8}, Op_Dziel, {1,0}},
   };
 
+/*****************************************************
+ * Tablica, ktora jest widoczna tylko w tym module.  *
+ * Zawiera ona tresc trudnego testu.                                      POPRAWICCCCC!!!!!     *
+ *****************************************************/
 static WyrazenieZesp TestTrudny[] =
   { {{4,8}, Op_Dziel, {1,0}},
   };
    
-
 /*****************************************************************************************
  * W bazie testu ustawia wybrany test jako biezacy test i indeks pytania                 *
  * ustawia na pierwsze z nich.                                                           *
@@ -44,9 +44,6 @@ void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned in
   wskBazaTestu->IloscPytan = IloscPytan;
   wskBazaTestu->IndeksPytania = 0;
 }
-
-
-
 
 /********************************************************************************************
  * Inicjalizuje test kojarzac zmienna dostepna poprzez wskaznik wskBazaTestu                *
@@ -73,17 +70,13 @@ bool InicjalizujTest( BazaTestu  *wskBazaTestu, const char *sNazwaTestu )
     UstawTest(wskBazaTestu,TestLatwy,sizeof(TestLatwy)/sizeof(WyrazenieZesp));
     return true;
   }
-
   if (!strcmp(sNazwaTestu,"trudny")) {
     UstawTest(wskBazaTestu,TestTrudny,sizeof(TestTrudny)/sizeof(WyrazenieZesp));
     return true;
   }
-  
   cerr << "Otwarcie testu '" << sNazwaTestu << "' nie powiodlo sie." << endl;
   return false;
 }
-
-
 
 /***************************************************************************************
  * Funkcja udostepnia nastepne pytania o ile jest odpowiednia ich ilosc.               *

@@ -1,9 +1,9 @@
 #ifndef BAZATESTU_HH
 #define BAZATESTU_HH
-
-
 #include "WyrazenieZesp.hh"
 
+#include <iostream>
+using std::cerr;
 
 /**********************************************************
  * Modeluje pojecie bazy testu z zestawem pytan w tablicy *
@@ -16,7 +16,6 @@ struct BazaTestu {
   unsigned int    IloscPytan;    /* Ilosc wszystkich pytan */
   unsigned int    IndeksPytania; /* Numer pytania, ktore ma byc pobrane jako nastepne */
 };
-
 
 /*********************************************
  * Inicjalizuje test powiazany z dana nazwa. *

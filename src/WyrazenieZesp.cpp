@@ -12,16 +12,14 @@ std::ostream & operator << (std::ostream & strm, WyrazenieZesp &WZes) {
   return strm;
 }
 
-
 /***********************************************
- * Przeciazenie operatora dla wyswietlania w   *
+ * Przeciazenie operatora dla wyswietlania     *
  *   operatora w wyrazeniu zespolonym.         *
  * Argumenty:                                  *
  *    OP - operator z wyrazenia zespolonego    *
  *    strm - strumien na wejscie operatora     *
  ***********************************************/
 std::ostream & operator << (std::ostream & strm, Operator &OP) {
-
   switch(OP){
   case Op_Dodaj: {cout << " + "; break;}
   case Op_Odejmij: {cout << " - "; break;}
@@ -31,7 +29,6 @@ std::ostream & operator << (std::ostream & strm, Operator &OP) {
   return strm;
 }
   
-
 /***********************************************
  * Funkcja obliczajaca wartosc wyrazenia       *
  *   zespolonego.                              *
@@ -40,7 +37,6 @@ std::ostream & operator << (std::ostream & strm, Operator &OP) {
  ***********************************************/
 LZespolona oblicz(WyrazenieZesp WyrZ){
   LZespolona Wynik;
-  
   switch(WyrZ.Op){
   case Op_Dodaj: {Wynik = WyrZ.Arg1 + WyrZ.Arg2; break;}
   case Op_Odejmij: {Wynik = WyrZ.Arg1 - WyrZ.Arg2; break;}
@@ -49,7 +45,6 @@ LZespolona oblicz(WyrazenieZesp WyrZ){
   }
   return Wynik;
 }
-
 
 /***********************************************
  * Przeciazenie operatora dla wczytywania      *
@@ -62,7 +57,6 @@ std::istream & operator >> (std::istream & strm, WyrazenieZesp &WZes) {
   strm >> WZes.Arg1 >> WZes.Op >> WZes.Arg2;
   return strm;
 }
-
 
 /***********************************************
  * Przeciazenie operatora dla wczytywania      *

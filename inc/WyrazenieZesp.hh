@@ -8,8 +8,6 @@
  *********************************************/
 enum Operator {Op_Dodaj, Op_Odejmij, Op_Mnoz, Op_Dziel};
 
-
-
 /***********************************************************
  * Modeluje pojecie dwuargumentowego wyrazenia zespolonego *
  ***********************************************************/

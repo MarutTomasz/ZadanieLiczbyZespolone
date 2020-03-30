@@ -1,11 +1,11 @@
 #include "LZespolona.hh"
 
-
 /******************************************
  * Tworzy sprzezenie do liczby zespolonej *
  ******************************************/
 LZespolona sprzez(LZespolona Liczba){
   LZespolona Wynik;
+  Wynik.re = Liczba.re;
   Wynik.im = Liczba.im * (-1);
   return Wynik;
 }
@@ -13,11 +13,10 @@ LZespolona sprzez(LZespolona Liczba){
 /*********************************************
  * Liczy kwadrat modulu z liczby zespolonej  *
  *********************************************/
-double modul(LZespolona Liczba){
+double modul2(LZespolona Liczba){
   double Modul = (Liczba.re * Liczba.re) + (Liczba.im * Liczba.im);
   return Modul;
 }
-
 
 /***********************************************************
  * Realizuje dodanie dwoch liczb zespolonych.              *
@@ -29,12 +28,10 @@ double modul(LZespolona Liczba){
  ***********************************************************/
 LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2){
   LZespolona  Wynik;
-
   Wynik.re = Skl1.re + Skl2.re;
   Wynik.im = Skl1.im + Skl2.im;
   return Wynik;
 }
-
 
 /***********************************************************
  * Realizuje odejmowanie dwoch liczb zespolonych.          *
@@ -82,16 +79,14 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2){
  ***********************************************************/
 LZespolona  operator / (LZespolona  Skl1,  double Modul){
   LZespolona  Wynik;
- 
   if(Modul != 0){
     Wynik.re = Skl1.re / Modul;
     Wynik.im = Skl1.im / Modul;
     return Wynik;
   }
-
-  return Skl1;
+  std::cerr << "Nie można dzielić przez 0" << endl;  
+  return Skl1;   /*  PAMIĘTAĆ ZMIENIĆ KONCZENIE FUNKCJI   */
 }
-
 
 /***********************************************************
  * Realizuje dzielenie dwoch liczb zespolonych.            *
@@ -107,11 +102,10 @@ LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2){
   LZespolona Wynik;
   LZespolona Sprzezenie = sprzez(Skl2);
   LZespolona Licznik = Skl1 * Sprzezenie;
-  double Modul = modul(Skl2);
+  double Modul = modul2(Skl2);
   Wynik = Licznik / Modul;
   return Wynik;
 }
-
 
 /************************************************************
  * Tworzy nowa liczbe zespolona.                            *
@@ -123,12 +117,10 @@ LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2){
  ************************************************************/
 LZespolona utworz(double Re, double Im){
   LZespolona Nowa;
-  
   Nowa.re = Re;
   Nowa.im = Im;
   return Nowa;
 }
-
 
 /*************************************************************
  * Przeciazenie operatora dla wyswietlania liczb zespolonych *
@@ -136,11 +128,10 @@ LZespolona utworz(double Re, double Im){
  *    Liczba - struktura z liczba do wyswietlrnia            *
  *    strm - strumien podawany na wejscie operatora          *
  *************************************************************/
-std::ostream & operator << (std::ostream &strm, LZespolona &Liczba) {
+std::ostream & operator << (std::ostream &strm, const LZespolona &Liczba) {
   cout << '(' << Liczba.re << showpos << Liczba.im << noshowpos << "i)";
   return strm; 
 }
-
 
 /*************************************************************
  * Przeciazenie operatora dla wczytywania liczb zespolonych  *
@@ -164,10 +155,27 @@ std::istream & operator >> (std::istream &strm, LZespolona &Liczba) {
   return strm;
 }
 
+/**************************************************************
+ * Przeciazenie operatora dla porownywania liczb zespolonych  *
+ * Argumenty:                                                 *
+ *    Odpowiedz - pierwsza porównywana liczba                 *
+ *    Wynik - druga poronwywana liczba                         *
+ **************************************************************/
 bool operator == (LZespolona Odpowiedz, LZespolona Wynik){
   if (Odpowiedz.re == Wynik.re)
     if (Odpowiedz.im == Wynik.im)
       return true;
   return false;
 }
-  
+
+/**************************************************************
+ * Przeciazenie operatora dla rozrozniania liczb zespolonych  *
+ * Argumenty:                                                 *
+ *    Odpowiedz - pierwsza porównywana liczba                 *
+ *    strm - druga poronwywana liczba                         *
+ **************************************************************/
+bool operator != (LZespolona Odpowiedz, LZespolona Wynik){
+  if (Odpowiedz == Wynik)
+    return false;
+  return true;
+}

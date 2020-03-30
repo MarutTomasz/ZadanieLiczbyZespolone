@@ -30,10 +30,11 @@ LZespolona operator * (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator / (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator / (LZespolona  Skl1,  double Mudul);
 bool operator == (LZespolona Odpowiedz, LZespolona Wynik);
+bool operator != (LZespolona Odpowiedz, LZespolona Wynik);
 std::istream & operator >> (std::istream &strm, LZespolona &Skl);
-std::ostream & operator << (std::ostream &strm, LZespolona &Skl);
+std::ostream & operator << (std::ostream &strm, const LZespolona &Skl);
 
 LZespolona utworz(double Re, double Im );
 LZespolona sprzez(LZespolona Liczba);
-double modul(LZespolona Liczba);
+double modul2(LZespolona Liczba);
 #endif
