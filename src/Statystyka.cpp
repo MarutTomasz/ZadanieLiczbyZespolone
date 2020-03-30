@@ -80,21 +80,21 @@ bool sprawdz_pomylki (const Statystyka &Stat) {
   if (Stat.pomylka == 0){
     cout << endl;
     cout << "    Niepoprawnie wpisana liczba zepolona" << endl;
-    cout << "    Pozostały 3 proby" << endl;
+    cout << "    Pozostały 3 proby" << endl << endl;
     cout << "    Twoja odpowiedz:  ";
     return true;
   }
   else if (Stat.pomylka == 1){
     cout << endl;
     cout << "    Niepoprawnie wpisana liczba zepolona" << endl;
-    cout << "    Pozostały 2 proby" << endl;
+    cout << "    Pozostały 2 proby" << endl << endl;
     cout << "    Twoja odpowiedz:  ";
     return true;
   }
   else if (Stat.pomylka == 2){
     cout << endl;
     cout << "    Niepoprawnie wpisana liczba zepolona" << endl;
-    cout << "    Pozostała ostatnia proba" << endl;
+    cout << "    Pozostała ostatnia proba" << endl << endl;
     cout << "    Twoja odpowiedz:  ";
     return true;
   }

@@ -84,8 +84,9 @@ LZespolona  operator / (LZespolona  Skl1,  double Modul){
     Wynik.im = Skl1.im / Modul;
     return Wynik;
   }
-  std::cerr << "Nie można dzielić przez 0" << endl;  
-  return Skl1;   /*  PAMIĘTAĆ ZMIENIĆ KONCZENIE FUNKCJI   */
+  std::cerr << "Nie można dzielić przez 0" << endl;
+  std::cerr << "Koniec dzialania programu" << endl << endl;
+  exit(1);
 }
 
 /***********************************************************

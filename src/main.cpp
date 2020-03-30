@@ -24,7 +24,7 @@ int main(int argc, char **argv){
     cerr << " Inicjalizacja testu nie powiodla sie." << endl;
     return 1;
   }
-
+  
   inicjuj_statystyka(Staty);
   
   cout << endl;
